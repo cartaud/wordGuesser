@@ -9,7 +9,7 @@
 <body>
     <header>
         <h1>Word Guess Game</h1>
-        <button onClick="">Start</button>
+        <button onClick="countDown()">Start</button>
     </header>
     <div id="content">
         <div id="wordWrap">
@@ -21,13 +21,15 @@
                     <p>Wins: <span id="wins"></span></p>
                     <p>Losses: <span id="loss"></span></p>
                 </div>
-                <button onClick="">Start</button>
+                <button onClick="">Reset Score</button>
             </div>
-            <div id="time">
-    
+            <div id="counter">
+                <span id="time"></span>
+                <p id="remaining"></p>
             </div>
         </div>
     </div>
+    <h1 id="message"></h1>
     
     <script src="./assets/js/script.js"></script>
 </body>
