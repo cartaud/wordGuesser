@@ -28,8 +28,12 @@ header button {
 
 #wordWrap {
     width: 60%;
+    height: 200px;;
     background: linear-gradient(91deg,rgb(185, 102, 24),rgb(208 211 5),rgb(185 102 24));
-    padding: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 
 #gameInfo{
@@ -65,3 +69,15 @@ header button {
     font-size: 80px;
     color: red;
 }
+
+.letter {
+    font-size: 40px;
+}
+
+u {
+    text-decoration: none;
+    border-bottom: 10px solid black;
+}
+
+  
+  
