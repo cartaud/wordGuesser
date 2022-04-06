@@ -1,15 +1,16 @@
 
-
-
 let count = document.querySelector('#time');
 let remaining = document.querySelector('#remaining');
 let message = document.querySelector('#message');
 let wordDisp = document.querySelector('#wordWrap')
+let win = document.querySelector('#win')
+let loss = document.querySelector('#loss')
 
-
+win.textContent = 0;
+loss.textContent = 0;
 
 function generateWord() {
-    countDown()
+    
     wordDisp.innerHTML = '';
     
     let wordArr = ['anxiously', 'breakdown', 'cylinders', 'campfires', 'hangover', 'keyboard', 'merchant', 'randomize', 'ownership', 'uploading'];
@@ -29,55 +30,80 @@ function generateWord() {
         wordDisp.append(underline);
         underline.append(span)
     }
-
+    
     /*checks to see if a key the user presses is in the random word and
     if it is it makes that character visible*/ 
     let letters = document.querySelectorAll('.letter')
-    console.log(letters[1])
+    countDown(word, letters);
     window.addEventListener('keydown', function(event) {
         let x = event.key;
         if (word.includes(x)) {
             let position1 = word.indexOf(x);
             letters[position1].style.color = 'black';
-            if (word.includes(x)) {
-                let position2 = word.indexOf(x, position1+1);
-                letters[position2].style.color = 'black';
-            }
+            //I could add anther if here checking word.includes(x, position1 +1) but it gives errors
         }
         
     })
+}
+
+function countDown(word, letters) {
     
-}
-
-function match(event) {
-    console.log(event.key);
-}
-
-function countDown() {
-    message.textContent = '';
     let time = 10;
-     let timeInterval = setInterval(function() {
-        if (time>1) {
-            count.textContent = time; 
-            remaining.textContent = 'seconds remaining';
-            time--;
-        }
-        else if (time == 1) {
-            count.textContent = time;
-            remaining.textContent = 'second remaining'; 
-            time--;  
-        }
+    let timeInterval = setInterval(function() {
         
-        else {
-            count.textContent = time; 
-            remaining.textContent = 'seconds remaining';
-            clearInterval(timeInterval);
-            gameOver();
-        }
-    
+    //this below will never run. FIX when u come back!
+    if (time>1) {
+        count.textContent = time; 
+        remaining.textContent = 'seconds remaining';
+        time--;
+        checkComplete(word, letters, timeInterval)
+    }
+    else if (time == 1) {
+        count.textContent = time;
+        remaining.textContent = 'second remaining'; 
+        time--;  
+        checkComplete(word, letters, timeInterval)
+    }
+    else {
+        count.textContent = time; 
+        remaining.textContent = 'seconds remaining';
+        clearInterval(timeInterval);
+        loss.textContent++
+        gameOver(word, 1);
+    }
+
     }, 1000)
 }
 
-function gameOver() {
+function checkComplete(word, letters, timeInterval) {
+     //will check if all characters in word are visible 
+    let j=0;
+    for (let i=0;i<word.length;i++) {
+        if (letters[i].style.color == 'black') {
+            j++
+            if (j==word.length) {
+                console.log('we did it');
+                clearInterval(timeInterval);
+                win.textContent++;
+                gameOver();
+            }
+        }
+          
+         
+     }
+}
+
+function gameOver(word, x) {
+    if (x==1) {
+        message.textContent = `You lost! The word was ${word}`
+    }
+    else {
+        message.textContent = '';
+    }
     generateWord()
+}
+
+function resetScore() {
+    win.textContent = 0;
+    loss.textContent = 0;
 }
