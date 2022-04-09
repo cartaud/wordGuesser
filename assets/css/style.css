@@ -13,7 +13,7 @@ header {
 }
 
 header button {
-    background: linear-gradient(91deg,rgb(185, 102, 24),rgb(208 211 5),rgb(185 102 24));
+    background: radial-gradient(circle, rgba(240,230,140,1) 0%, rgba(187,96,33,0.9542191876750701) 100%);
     padding: 5px 25px;
     border: none;
     border-radius: 3px;
@@ -28,16 +28,17 @@ header button {
 #wordWrap {
     width: 60%;
     height: 300px;
-    background: linear-gradient(91deg,rgb(209, 138, 71),rgb(208 211 5),rgb(209, 138, 71));
+    background: radial-gradient(circle, rgba(240,230,140,1) 0%, rgba(187,124,33,0.604079131652661) 100%);
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
+
 }
 
 #gameInfo{
     width: 30%;
-    background: linear-gradient(91deg,rgb(209, 138, 71),rgb(208 211 5),rgb(209, 138, 71));
+    background: radial-gradient(circle, rgba(240,230,140,1) 0%, rgba(187,124,33,0.604079131652661) 100%);
     display: flex;
     flex-direction: column;
     padding: 20px 10px 10px 10px;
@@ -50,7 +51,7 @@ header button {
 }
 
 #scoreReset button {
-    background: linear-gradient(91deg,rgb(185, 102, 24),rgb(208 211 5),rgb(185 102 24));;
+    background: radial-gradient(circle, rgba(240,230,140,1) 0%, rgba(187,96,33,0.9542191876750701) 100%);
     padding: 0 30px;
     margin: 10px;
     border: solid black 1px;
@@ -88,11 +89,15 @@ header button {
 
 u {
     text-decoration: none;
-    border-bottom: 10px solid black;
+    border-bottom: 5px solid black;
+    padding-right: 10px;
 }
 
-  #wordWrap, #gameInfo {
-      border: solid white 1px;
-      border-radius: 5px;
-      box-shadow: 2px aliceblue;
+  #wordWrap, #gameInfo, #counter {
+       border: 1px solid #eceff1;
+    border-radius: 8px;
+    box-shadow: rgba(60, 64, 67, 2) 0 1px 2px 0,
+    rgba(60, 64, 67, 0.15) 0 2px 4px 3px;
   }
+
+  

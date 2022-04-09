@@ -6,8 +6,11 @@ let wordDisp = document.querySelector('#wordWrap')
 let win = document.querySelector('#win')
 let loss = document.querySelector('#loss')
 
-win.textContent = 0;
-loss.textContent = 0;
+let wins = localStorage.getItem('wins') || 0;
+let losses = localStorage.getItem('losses') || 0;
+
+win.textContent = wins;
+loss.textContent = losses;
 
 function generateWord() {
     
@@ -34,12 +37,14 @@ function generateWord() {
     /*checks to see if a key the user presses is in the random word and
     if it is it makes that character visible*/ 
     let letters = document.querySelectorAll('.letter')
+    let underlines = document.querySelectorAll('u');
     countDown(word, letters);
     window.addEventListener('keydown', function(event) {
         let x = event.key;
         if (word.includes(x)) {
             let position1 = word.indexOf(x);
             letters[position1].style.color = 'black';
+            underlines[position1].style.borderBottom = 'none';
             //I could add anther if here checking word.includes(x, position1 +1) but it gives errors
         }
         
@@ -62,13 +67,15 @@ function countDown(word, letters) {
         count.textContent = time;
         remaining.textContent = 'second remaining'; 
         time--;  
-        checkComplete(word, letters, timeInterval)
+        checkComplete(word, letters, timeInterval);
     }
     else {
         count.textContent = time; 
         remaining.textContent = 'seconds remaining';
         clearInterval(timeInterval);
-        loss.textContent++
+        losses++;
+        localStorage.setItem('losses', losses);
+        loss.textContent = losses
         gameOver(word, 1);
     }
 
@@ -82,9 +89,10 @@ function checkComplete(word, letters, timeInterval) {
         if (letters[i].style.color == 'black') {
             j++
             if (j==word.length) {
-                console.log('we did it');
                 clearInterval(timeInterval);
-                win.textContent++;
+                wins++;
+                localStorage.setItem('wins', wins);
+                win.textContent = wins;
                 gameOver();
             }
         }
@@ -104,6 +112,10 @@ function gameOver(word, x) {
 }
 
 function resetScore() {
-    win.textContent = 0;
-    loss.textContent = 0;
+    wins = 0;
+    losses = 0;
+    localStorage.setItem('wins', wins);
+    localStorage.setItem('losses', losses);
+    win.textContent = wins;
+    loss.textContent = losses;
 }
