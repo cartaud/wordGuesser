@@ -16,7 +16,7 @@ function generateWord() {
     
     wordDisp.innerHTML = '';
     
-    let wordArr = ['anxiously', 'breakdown', 'cylinders', 'campfires', 'hangover', 'keyboard', 'merchant', 'randomize', 'ownership', 'uploading'];
+    let wordArr = ['anxiously', 'breakdown', 'cylinders', 'campfires', 'hangover', 'keyboard', 'merchant', 'randomize', 'ownership', 'uploading', 'chadd', 'javascript', 'guessing', 'tacos', 'swimming', 'summer'];
     let rand = Math.floor(Math.random()*wordArr.length);
     let word = wordArr[rand];
     
@@ -41,13 +41,12 @@ function generateWord() {
     countDown(word, letters);
     window.addEventListener('keydown', function(event) {
         let x = event.key;
-        if (word.includes(x)) {
-            let position1 = word.indexOf(x);
-            letters[position1].style.color = 'black';
-            underlines[position1].style.borderBottom = 'none';
-            //I could add anther if here checking word.includes(x, position1 +1) but it gives errors
+        for (let i=0; i<word.length;i++){ //checks to see if key pressed is in random word
+            if (word[i] == x) { 
+                letters[i].style.color = 'black'; //if match is found, it reveals the letters and hides underline
+                underlines[i].style.borderBottom = 'none';
+            }
         }
-        
     })
 }
 
@@ -96,17 +95,17 @@ function checkComplete(word, letters, timeInterval) {
                 gameOver();
             }
         }
-          
-         
      }
 }
 
 function gameOver(word, x) {
     if (x==1) {
+        message.style.color = 'red';
         message.textContent = `You lost! The word was ${word}`
     }
     else {
-        message.textContent = '';
+        message.style.color = 'green';
+        message.textContent = 'Congrats! You solved the word!';
     }
     generateWord()
 }
